@@ -1,8 +1,9 @@
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Post
 from blog.forms import PostForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 
 class PostListView(ListView):
     model = Post
@@ -27,4 +28,10 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
     model = Post
     template_name = 'blog/post_edit.html'
     form_class = PostForm
+    login_url = '/admin/'
+
+class PostDeleteView(LoginRequiredMixin, DeleteView):
+    model = Post
+    template_name = 'blog/post_delete.html'
+    success_url = reverse_lazy('home')
     login_url = '/admin/'
