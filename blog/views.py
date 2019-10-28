@@ -1,5 +1,5 @@
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from .models import Post
 from blog.forms import PostForm
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -18,6 +18,13 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     form_class = PostForm
     login_url = '/admin/'
 
+    # https://docs.djangoproject.com/en/2.2/topics/class-based-views/generic-editing/#models-and-request-user
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+class PostUpdateView(LoginRequiredMixin, UpdateView):
+    model = Post
+    template_name = 'blog/post_edit.html'
+    form_class = PostForm
+    login_url = '/admin/'
