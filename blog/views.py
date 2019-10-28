@@ -4,6 +4,8 @@ from .models import Post
 from blog.forms import PostForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
+from django.shortcuts import render, redirect
+from django.db.models import Q
 
 class PostListView(ListView):
     model = Post
@@ -35,3 +37,20 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'blog/post_delete.html'
     success_url = reverse_lazy('home')
     login_url = '/admin/'
+
+def post_search_view(request):
+    queryset_list = Post.objects.all()
+    query = request.GET.get('q')
+    if query:
+        queryset_list = queryset_list.filter(
+                Q(title__icontains=query) |
+                Q(body__icontains=query) 
+                ).distinct()
+    else:
+        queryset_list = None
+    posts = queryset_list
+    context = {
+        'title': 'Search Posts',
+        'posts': posts,
+    }
+    return render(request, 'blog/post_search.html', context)

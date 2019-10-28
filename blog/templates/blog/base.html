@@ -18,6 +18,14 @@
 
 <body>
 
+    <!-- Search Form -->
+    <form method="GET" action="/blog/search/" class="form-inline input-group py-3">
+        <input class="form-control" type="text" placeholder="Blog Search" aria-label="Blog Search"
+            aria-describedby="button-addon" name="q" value="{{ request.GET.q }}" aria-label="Search">
+        <div class="input-group-append">
+            <button class="btn btn-outline-primary" type="submit" id="button-addon">Search</button>
+        </div>
+    </form>
     
     {% block content %}
 
