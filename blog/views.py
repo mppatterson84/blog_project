@@ -4,7 +4,7 @@ from .models import Post
 from blog.forms import PostForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.db.models import Q
 
 class PostListView(ListView):
