@@ -10,6 +10,8 @@ from django.db.models import Q
 class PostListView(ListView):
     model = Post
     template_name = 'blog/home.html'
+    paginate_by = 10
+    ordering = ['-pk']
 
 class PostDetailView(DetailView):
     model = Post
@@ -54,3 +56,8 @@ def post_search_view(request):
         'posts': posts,
     }
     return render(request, 'blog/post_search.html', context)
+
+class PostListAllView(ListView):
+    model = Post
+    template_name = 'blog/post_list_all.html'
+    ordering = ['pk']
