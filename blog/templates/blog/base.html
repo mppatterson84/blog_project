@@ -20,14 +20,37 @@
 
 <body>
 
-    <!-- Search Form -->
-    <form method="GET" action="/blog/search/" class="form-inline input-group py-3">
-        <input class="form-control" type="text" placeholder="Blog Search" aria-label="Blog Search"
-            aria-describedby="button-addon" name="q" value="{{ request.GET.q }}" aria-label="Search">
-        <div class="input-group-append">
-            <button class="btn btn-outline-primary" type="submit" id="button-addon">Search</button>
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'home' %}">Blog</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item  m-auto active">
+                    <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item m-auto">
+                    <a class="nav-link" href="{% url 'post-list-all' %}">All Posts</a>
+                </li>
+                <li class="nav-item m-auto">
+                    <a class="nav-link" href="{% url 'post-new' %}">New Post</a>
+                </li>
+            </ul>
+            <div class="ml-4">
+                <!-- Search Form -->
+                <form method="GET" action="/blog/search/" class="form-inline input-group">
+                    <input class="form-control" type="text" placeholder="Blog Search" aria-label="Blog Search"
+                        aria-describedby="button-addon" name="q" value="{{ request.GET.q }}" aria-label="Search">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-primary" type="submit" id="button-addon">Search</button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </form>
+    </nav>
     
     {% block content %}
 
