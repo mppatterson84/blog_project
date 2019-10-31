@@ -13,6 +13,14 @@ class PostListView(ListView):
     paginate_by = 10
     ordering = ['-pk']
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Home'
+        context['home_active'] = 'active'
+        context['home_active_link'] = '#'
+        context['home_active_sr'] = '<span class="sr-only">(current)</span>'
+        return context
+
 class PostDetailView(DetailView):
     model = Post
     template_name = 'blog/post_detail.html'
@@ -22,6 +30,14 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     template_name = 'blog/post_new.html'
     form_class = PostForm
     login_url = '/admin/'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'New Post'
+        context['new_active'] = 'active'
+        context['new_active_link'] = '#'
+        context['new_active_sr'] = '<span class="sr-only">(current)</span>'
+        return context
 
     # https://docs.djangoproject.com/en/2.2/topics/class-based-views/generic-editing/#models-and-request-user
     def form_valid(self, form):
@@ -34,11 +50,21 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
     form_class = PostForm
     login_url = '/admin/'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Edit'
+        return context
+
 class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = Post
     template_name = 'blog/post_delete.html'
     success_url = reverse_lazy('home')
     login_url = '/admin/'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Delete'
+        return context
 
 def post_search_view(request):
     queryset_list = Post.objects.all()
@@ -61,3 +87,11 @@ class PostListAllView(ListView):
     model = Post
     template_name = 'blog/post_list_all.html'
     ordering = ['pk']
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'All Posts'
+        context['all_active'] = 'active'
+        context['all_active_link'] = '#'
+        context['all_active_sr'] = '<span class="sr-only">(current)</span>'
+        return context

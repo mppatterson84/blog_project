@@ -15,7 +15,17 @@
 
     <link rel="stylesheet" href="{% static 'blog/css/base.css' %}">
 
-    <title>Blog Project</title>
+    <title>Blog - 
+        
+        {% if title and post.title %}
+            {{ title }} post: {{ post.title }}
+        {% elif title %}
+            {{ title }}
+        {% elif post.title %}
+            {{ post.title }}
+        {% endif %}
+            
+    </title>
 </head>
 
 <body>
@@ -29,14 +39,14 @@
     
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item  m-auto active">
-                    <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+                <li class="nav-item  m-auto {{ home_active }}">
+                    <a class="nav-link" href="{{ home_active_link|default:'/blog/' }}">Home {{ home_active_sr|safe }}</a>
                 </li>
-                <li class="nav-item m-auto">
-                    <a class="nav-link" href="{% url 'post-list-all' %}">All Posts</a>
+                <li class="nav-item m-auto {{ all_active }}">
+                    <a class="nav-link" href="{{ all_active_link|default:'/blog/all/' }}">All Posts {{ all_active_sr|safe }}</a>
                 </li>
-                <li class="nav-item m-auto">
-                    <a class="nav-link" href="{% url 'post-new' %}">New Post</a>
+                <li class="nav-item m-auto {{ new_active }}">
+                    <a class="nav-link" href="{{ new_active_link|default:'/blog/new/' }}">New Post {{ new_active_sr|safe }}</a>
                 </li>
             </ul>
             <div class="ml-4">
