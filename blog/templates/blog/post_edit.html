@@ -1,4 +1,5 @@
 {% extends 'blog/base.html' %}
+{% load static %}
 
 
 {% block content %}
@@ -8,4 +9,5 @@
         <input class="btn btn-success" type="submit" value="Save" />
         <a href="{% url 'post-detail' post.pk post.slug %}" class="btn btn-warning">Cancel</a>
     </form>
+    <script src="{% static 'blog/js/ckeditor_custom.js' %}"></script>
 {% endblock content %}
