@@ -8,7 +8,7 @@ class Post(models.Model):
     body = models.TextField()
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     created_at = models.DateTimeField(default=datetime.now, blank=False)
-    updated_at = models.DateTimeField(default=created_at, blank=False)
+    updated_at = models.DateTimeField(default=datetime.now, blank=False)
     slug = models.SlugField(unique=False, blank=True, default='slug')
 
     def __str__(self):
