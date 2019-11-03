@@ -1,6 +1,6 @@
 from django import forms
 from blog.models import Post
-from django.contrib.auth.models import User
+from ckeditor.widgets import CKEditorWidget
 
 class PostForm(forms.ModelForm):
     title = forms.CharField(
@@ -15,16 +15,9 @@ class PostForm(forms.ModelForm):
     )
 
     body = forms.CharField(
-        label='', 
-        required=True, 
-        widget=forms.Textarea(
-            attrs={
-                "placeholder": "Post Body Content", 
-                "class": "form-control", 
-                "id": "bodyTextArea", 
-                "rows": "15"
-            }
-        )
+        label='',
+        required=True,
+        widget=CKEditorWidget()
     )
     
     class Meta:
