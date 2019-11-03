@@ -8,6 +8,7 @@ class Post(models.Model):
     body = models.TextField()
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     created_at = models.DateTimeField(default=datetime.now, blank=False)
+    updated_at = models.DateTimeField(default=datetime.now, blank=False)
     slug = models.SlugField(unique=False, blank=True, default='slug')
 
     def __str__(self):
@@ -15,6 +16,7 @@ class Post(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
+        self.updated_at = datetime.now()
         super(Post, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
