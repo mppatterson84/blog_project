@@ -8,10 +8,10 @@
     <p>Author: {{ post.author }}</p>
     <p>Created at: {{ post.created_at }}</p>
     
-    {% if post.created_at != post.updated_at %}
-
-    <p>Updated at: {{ post.updated_at }}</p>
-        
+    {% if post.created_at|date:"M:d:Y" == post.updated_at|date:"M:d:Y" and post.created_at|time:"H:i" != post.updated_at|time:"H:i" %}
+        <p>Updated at: {{ post.updated_at }}</p>
+    {% elif post.created_at|date:"M:d:Y" != post.updated_at|date:"M:d:Y" %}
+        <p>Updated at: {{ post.updated_at }}</p>
     {% endif %}
         
     <p>Slug: {{ post.slug }}</p>
