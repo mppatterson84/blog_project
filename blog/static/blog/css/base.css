@@ -6,6 +6,10 @@ main{
     background-color: white;
     padding: 1em;
 }
+main img{
+    width: 100%;
+    height: auto;
+}
 .post-entry{
     border: 2px solid lightgray;
     border-radius: 5px;
