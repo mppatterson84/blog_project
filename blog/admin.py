@@ -22,5 +22,6 @@ class PostAdminForm(forms.ModelForm):
 
 class PostAdmin(admin.ModelAdmin):
     form = PostAdminForm
+    readonly_fields = ('updated_at', 'slug')
 
 admin.site.register(Post, PostAdmin)
